@@ -126,7 +126,7 @@ def start_date(start):
     total_temp = session.query(func.sum(Measurement.tobs)).\
         filter(func.strftime("%Y-%m-%d", Measurement.date) >= start).one()
     total_count = session.query(Measurement.tobs).\
-        filter(func.strftime("%Y-%m-%d", Measurement.date) >= start).count()
+        filter(round(func.strftime("%Y-%m-%d", Measurement.date),2) >= start).count()
     avg_temp = total_temp[0]/total_count
 
     rows = [{"Min Temperature":min_temp},
